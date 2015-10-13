@@ -23,7 +23,7 @@ class EventBus {
 		let key = Event.eventName(type)
 		
 		this.listeners[key] = this.listeners[key] || {};
-		this.listeners[key][++this.id](!!self ? listener.bind(self) : listener);
+		this.listeners[key][++this.id] = (!!self ? listener.bind(self) : listener);
 		
 		return this.id;
 	}
