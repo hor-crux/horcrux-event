@@ -15,8 +15,6 @@ declare module "horcrux-event" {
     addEventListener<T>(type: {
         new (): Event<T>;
     }, listener: (data: Event<T>) => any, self?: any): number;
-    removeEventListener<T>(type: {
-        new (): Event<T>;
-    }, id: number): void;
+    removeEventListener<T>(id: number): void;
 }
 }

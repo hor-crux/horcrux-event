@@ -28,10 +28,15 @@ class EventBus {
 		return this.id;
 	}
 	
-	public removeEventListener<T>(type: {new():Event<T>}, id:number): void {
-		let key = Event.eventName(type)
+	public removeEventListener<T>(id:number): void {
+		for(var key in this.listeners) {
+			if(id in this.listeners[key]) {
+				delete this.listeners[key][id];
+				return;
+			}
+		}
 		
-		delete this.listeners[key][id];
+		throw "Could not remove EventListener for ID '" + id + "'";
 	}
 }
 
