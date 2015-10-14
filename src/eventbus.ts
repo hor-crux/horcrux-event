@@ -36,7 +36,7 @@ class EventBus {
 			}
 		}
 		
-		throw "Could not remove EventListener for ID '" + id + "'";
+		console.log("Could not remove EventListener for ID '" + id + "'");
 	}
 }
 
