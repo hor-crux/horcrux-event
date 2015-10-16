@@ -15,11 +15,13 @@ class EventBus {
 		let key = Event.eventName(<{new():Event<any>}>e.constructor);
 
 		for(let id in this.listeners[key]){
-			this.listeners[key][id](e);
+			(function(id) {
+				this.listeners[key][id](e, () => {this.removeEventListener(id);});
+			})(id)
 		}
 	}
 	
-	public addEventListener<T>(type: {new():Event<T>}, listener: (data:Event<T>)=>any, self?:any): number {
+	public addEventListener<T>(type: {new():Event<T>}, listener: (data:Event<T>, remove:Function)=>any, self?:any): number {
 		let key = Event.eventName(type)
 		
 		this.listeners[key] = this.listeners[key] || {};
