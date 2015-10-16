@@ -17,7 +17,7 @@ class EventBus {
 		for(let id in this.listeners[key]){
 			(function(id) {
 				this.listeners[key][id](e, () => {this.removeEventListener(id);});
-			})(id)
+			}).call(this, id)
 		}
 	}
 	
